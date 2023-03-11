@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\LogoutContoller;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,25 +24,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
+// Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
 Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
+Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
+Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
 Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
+Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
+Route::put('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
+Route::delete('/buku/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::group(['middleware' =>['auth']], function () {
-    // untuk semua role
-    Route::post('logout', LogoutContoller::class)->name('logout');
+    // Route::resource('buku', 'BukuController')->except(['index']);
+    Route::post('logout', LogoutController::class)->name('logout');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    
-    // hanya untuk role admin
-    Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
-        Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
-        Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
-        Route::put('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
-        Route::delete('/buku/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
-    });
 });
-
-
