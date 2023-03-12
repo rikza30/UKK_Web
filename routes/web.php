@@ -48,4 +48,7 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
     Route::put('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
     Route::delete('/buku/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+    Route::get('/export_excel', [BukuController::class, 'export_excel'])->name('export');
+    Route::get('/pdf', [BukuController::class, 'pdf']);
+
 });

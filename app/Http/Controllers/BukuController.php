@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Exports\BukuExport;
+
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
@@ -93,5 +97,22 @@ class BukuController extends Controller
         // Jika user tidak memiliki role admin, kirimkan pesan error dan kembali ke halaman sebelumnya
             return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke fitur ini.');
         }
+        
+    }
+    public function export_excel()
+	{
+		return Excel::download(new BukuExport, 'buku.xlsx');
+	}
+    public function pdf()
+    {
+        $data = [
+            'books' => Buku::all()
+        ];
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('export', $data));
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->render();
+        return $pdf->stream('daftar_buku.pdf');
     }
 }

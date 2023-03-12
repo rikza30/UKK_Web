@@ -5,8 +5,9 @@
     {{-- untuk memelakukan print report --}}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <a href="{{route('export')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Print Report</a>
+        
     </div>  
     @if (auth()->user()->role == "admin")
 
@@ -63,6 +64,7 @@
             </div>
         @endif       
         <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('buku.create') }}'">Tambah Buku</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url('/pdf') }}'">Print PDF</button>
     @elseif (auth()->user()->role == "user")
 
         <div class="container">
