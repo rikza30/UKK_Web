@@ -83,11 +83,15 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        $buku = Buku::findOrFail($id);
-        $buku->delete();
+        // Cek apakah user memiliki role admin
+        if (auth()->user()->role == 'admin') {
+            $buku = Buku::findOrFail($id);
+            $buku->delete();
 
-        return redirect()->route('home')->with('success', 'Buku deleted successfully.');
+            return redirect()->route('home')->with('success', 'Buku deleted successfully.');
+        } else {
+        // Jika user tidak memiliki role admin, kirimkan pesan error dan kembali ke halaman sebelumnya
+            return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke fitur ini.');
+        }
     }
-    
-
 }

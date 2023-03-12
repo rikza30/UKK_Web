@@ -8,7 +8,7 @@
       <p class="lead">Temukan berbagai buku dan artikel menarik untuk dibaca.</p>
       <hr class="my-4">
       <p>Website ini menyediakan koleksi buku dan artikel dalam berbagai kategori, lengkap dengan deskripsi dan informasi peminjaman.</p>
-      <a class="btn btn-primary btn-lg" href="/home" role="button">Lihat Koleksi Buku</a>
+      <a class="btn btn-primary btn-lg" href="/buku" role="button">Lihat Koleksi Buku</a>
     </div>
   </div>
 @endsection

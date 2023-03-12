@@ -50,7 +50,17 @@
         </div>
         @endif
         @if(session('success'))
-            <div>{{ session('success') }}</div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @elseif(session('error'))
+            <div class="card mb-4">
+                <div class="card-body">
+                    {{ session('error') }}
+                </div>
+            </div>
         @endif       
         <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('buku.create') }}'">Tambah Buku</button>
     @elseif (auth()->user()->role == "user")

@@ -42,4 +42,10 @@ Route::group(['middleware' =>['auth']], function () {
     // Route::resource('buku', 'BukuController')->except(['index']);
     Route::post('logout', LogoutController::class)->name('logout');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
+    Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
+    Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
+    Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
+    Route::put('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
+    Route::delete('/buku/destroy/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
 });
